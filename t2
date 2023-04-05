@@ -1,0 +1,24 @@
+import CryptoPoops from 0x02
+
+import NonFungibleToken from 0x01
+
+transaction(recipient: Address) {
+
+// the NFTMinter will sign this transaction
+
+prepare(acct: AuthAccount) {
+
+let nftMinter = acct.borrow< &CryptoPoops.NFTMinter > (from: /storage/Minter)!
+
+let publicReference = getAccount (recipient).getCapability(/public/Collection)
+                         .borrow<&CryptoPoops.Collection{NonFungiableToken.Collection}>()
+                         ??panic("This account does not have a Collection")
+
+
+   publicReference.deposit(token: <- nftMinter.createNFT())
+}
+execute {
+
+log ("stored newly minted NFT into Collection")
+}
+}
