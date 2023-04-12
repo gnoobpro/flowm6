@@ -1,5 +1,5 @@
 import CryptoPoops from 0x02
-import NonFungibleToken from 0x02
+import NonFungibleToken from 0x01
 
 pub fun main(acc: Address, _id: UInt64): &NonFungibleToken.NFT {
     let pubRef = getAccount(acc).getCapability(/public/MyCollection)
