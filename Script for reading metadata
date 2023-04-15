@@ -6,5 +6,7 @@ pub fun main(acc: Address, _id: UInt64): &NonFungibleToken.NFT {
                     .borrow<&CryptoPoops.Collection{CryptoPoops.CollectionPub}>()
                     ?? panic("Collection doesn't exist here")
 
-    return pubRef.borrowNFT(id: _id)
+    let ids = pubRef.getIDs()
+
+    return pubRef.borrowWholeNFT(id: ids[_id])
 }
